@@ -1,0 +1,42 @@
+[project]
+name = "threatmark"
+version = "0.1.0"
+description = "Event ingestion and inference platform"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "asyncpg>=0.29",
+    "fastapi>=0.115",
+    "greenlet>=3.0",
+    "opentelemetry-api>=1.27",
+    "opentelemetry-sdk>=1.27",
+    "opentelemetry-instrumentation-fastapi>=0.48b0",
+    "opentelemetry-instrumentation-sqlalchemy>=0.48b0",
+    "pydantic>=2.13.4",
+    "sqlmodel>=0.0.24",
+    "SQLAlchemy>=2.0",
+    "uvicorn[standard]>=0.30",
+    "python-dotenv>=1.2.2",
+]
+
+[project.optional-dependencies]
+otlp = [
+    "opentelemetry-exporter-otlp-proto-http>=1.27",
+]
+
+[project.scripts]
+test = "threatmark_backend_test.runner:main"
+stress = "threatmark_backend_stress.runner:main"
+serve = "threatmark_backend.server:run"
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.409",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["threatmark_backend", "threatmark_backend_test", "threatmark_backend_stress"]
