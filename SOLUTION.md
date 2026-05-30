@@ -28,7 +28,7 @@ Interactive docs are available at `/docs` (Swagger) and `/redoc`.
 Tracing uses **OpenTelemetry** (`observability.py`).
 
 - FastAPI requests and every SQL statement are auto-instrumented, so each trace shows the HTTP span with nested DB query spans.
-- `/infer` additionally emits a manual span per statistic — `infer.right_side_count`, `infer.right_side_count_last_7_days`, `infer.first_appeared`, `infer.last_appeared`, `infer.distinct_left_side_count` — all nested under a parent `infer` span. This makes the time to infer each field directly visible.
+- `/infer` additionally emits a manual span per statistic — `infer.infer.aggregate`, `infer.right_side_count_last_7_days` — all nested under a parent `infer` span. This makes the time to infer directly visible.
 - By default spans print to the console (no extra infrastructure). Set `OTEL_EXPORTER_OTLP_ENDPOINT` to ship to an OTLP collector (Jaeger/Tempo/Honeycomb); install the exporter with `uv sync --extra otlp`. `OTEL_SERVICE_NAME` overrides the service name.
 
 # Testing
